@@ -35,7 +35,7 @@ class App extends Component {
 
   //Permet de récupérer les pokemons et leur détails
   getMorePokemon() {
-
+    //TODO
   }
 
   render() {
