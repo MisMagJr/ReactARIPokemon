@@ -35,7 +35,24 @@ class App extends Component {
 
   //Permet de récupérer les pokemons et leur détails
   getMorePokemon() {
-    //TODO
+    fetch("https://pokeapi.co/api/v2/pokemon?limit=" + this.state.loadNumber + "&offset=" + this.state.offset)
+        .then((res) => res.json())
+        .then(pokemons => {
+          this.setState({
+            pokemons: pokemons.results
+          });
+          this.state.pokemons.map(pokemon => {
+            fetch(pokemon.url)
+                .then(response => response.json())
+                .then(data => {
+                  if (data) {
+                    var temp = this.state.pokemonDetails
+                    temp.push(data)
+                    this.setState({pokemonDetails: temp})
+                  }
+                })
+          })
+        });
   }
 
   render() {
